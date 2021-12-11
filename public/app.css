@@ -1,0 +1,15 @@
+body{
+    background-color:white;
+    color: #333;
+}
+
+h1, p, h2{
+    letter-spacing: 1px;
+    margin: 1rem;
+    padding:1rem;
+}
+
+article > div {
+    margin: 1rem;
+    padding:1rem;
+}
