@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\PostContoller;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,22 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',function () {
-    \Illuminate\Support\Facades\DB::listen(function($query){
-        logger($query->sql);
-    });
-    
-    return view('posts',[
-         'posts' => Post::with('category','author')->get()
-    ]);      
-});
+Route::get('/','PostController@index');
 
-Route::get('posts/{post}',function(Post $post){     
-    return view('post',[
-        'post' => $post
-    ]);
-
-});
+Route::get('posts/{post}','PostController@show');
 
 Route::get('categories/{category:id}',function(Category $category){     
     return view('posts',[
