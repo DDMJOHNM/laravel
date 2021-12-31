@@ -9,11 +9,11 @@
     </head>
     <body>
         <h1>{{ $post->title }}</h1>
-        <article>        
+        <article>
             <div>
                 {{ $post->body }}
             </div>
             <a href="/">back</a>
-        </article>       
+        </article>
     </body>
 </html>

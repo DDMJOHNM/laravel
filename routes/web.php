@@ -22,17 +22,26 @@ Route::get('/','PostController@index');
 
 Route::get('posts/{post}','PostController@show');
 
-Route::get('categories/{category:id}',function(Category $category){     
+Route::get('categories/{category:slug}',function(Category $category){
     return view('posts',[
-        'posts' => $category->posts->load(['category','author'])
+        'posts' => $category->posts,
+        'categories' => Category::all()
+    ]);
+
+})->name('category');
+
+Route::get('categories/{category:id}',function(Category $category){
+    return view('posts.index',[
+        'posts' => $category->posts
     ]);
 
 });
 
 
-Route::get('authors/{author:username}',function(User $author){     
-    return view('posts',[
-        'posts' => $author->posts->load(['category','author'])
+Route::get('authors/{author:username}',function(User $author){
+    return view('posts.index',[
+        'posts' => $author->posts->load(['category','author']),
+        'categories' => Category::all()
     ]);
 
 });
