@@ -13,3 +13,5 @@ article > div {
     margin: 1rem;
     padding:1rem;
 }
+
+svg.w-5.h-5 { width:10pt ; height: 10pt; border:1px solid grey !important;  }

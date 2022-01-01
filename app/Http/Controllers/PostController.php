@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Pagination\Paginator;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -8,20 +9,21 @@ use App\Models\Category;
 
 class PostController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
-        return view('posts.index',[
-            'posts' => Post::latest()->filter(request(['search','category','author']))->get(),
+        return view('posts.index', [
+            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(3)->withQueryString(),
             'categories' => Category::all(),
-            'currentCategory' => Category::firstWhere('slug',request('category'))
+            'currentCategory' => Category::firstWhere('slug', request('category'))
         ]);
     }
 
-    public function show(Post $post){
+    public function show(Post $post)
+    {
 
-        return view('posts.show',[
+        return view('posts.show', [
             'post' => $post
         ]);
-
     }
 }
