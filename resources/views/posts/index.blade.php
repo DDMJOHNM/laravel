@@ -9,14 +9,30 @@
     </head>
     <body>
         <h1>Hello World Blog</h1>
+        @auth
 
+        <span>Welcome back, {{ auth()->user()->name }} </span>
+
+        <form method="POST" action="/logout">
+            @csrf
+
+            <button type="submit">Log Out</button>
+        </form>
+
+        @else
+
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+
+
+        @endauth
        <div>{{ Request::is('/') ? $posts->links() : '' }}</div>
 
         <?php foreach ($posts as $post) : ?>
 
             <article>
                 <h1>
-                 <a href="/posts/{{ $post->id }}?page={{$_REQUEST['page']}}">
+                 <a href="/posts/{{ $post->id }}{{isset($_REQUEST['page']) ? '?page='.urlencode($_REQUEST['page']) : '' }}">
                   {{ $post->title }}
                  </a>
                 </h1>
@@ -31,3 +47,6 @@
 
     </body>
 </html>
+@if (session()->has('success'))
+    <p>{{ session('success') }}</p>
+@endif

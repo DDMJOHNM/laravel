@@ -13,7 +13,7 @@
             <div>
                 {{ $post->body }}
             </div>
-            <a href="/?page={{$_REQUEST['page']}}">back</a>
+            <a href="{{isset($_REQUEST['page']) ? '/?page='.urlencode($_REQUEST['page']) : '/' }}">back</a>
         </article>
     </body>
 </html>
