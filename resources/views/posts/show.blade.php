@@ -26,7 +26,7 @@
                 <div>
                     <header>
                         <h3>{{ $post->comments->last()->author->username}}</h3>
-                        <p>{{ $post->comments->last()->created_at }}</p>
+                        <p>{{ $post->comments->last()->created_at->format('F j, Y,g:i a') }}</p>
                     </header>
                     <p>
                         {{ $post->comments->last()->body}}
@@ -34,19 +34,32 @@
                 </div>
             </article>
         </section>
+        @endif
+
+        @auth
         <section>
-            <form method="POST" action="#">
+            <form method="POST" action="/posts/{{ $post->slug }}/comments">
                 @csrf
                 <header>
                     <img src="https://i.pravatar.cc/50" alt="">
                     <p>Want to participate?</p>
-                    <textarea placeholder="Comment here" rows="5" cols="30">
+                    <textarea placeholder="Comment here" rows="5" cols="30" name="body">
 
                     </textarea>
                 </header>
                 <button type="submit">Comment</button>
             </form>
+            @error
+                <span>{{ $message }}</span>
+            @enderror
+
         </section>
-        @endif
+
+       @else
+
+        <p>Register or login to leave a comment</p>
+
+        @endauth
+
     </body>
 </html>

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\PostContoller;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\PostCommentsController;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','PostController@index');
 
 Route::get('posts/{post}','PostController@show');
+
+Route::post('posts/{post:slug}/comments',[PostCommentsController::class,'store']);
 
 Route::get('categories/{category:slug}',function(Category $category){
     return view('posts',[
