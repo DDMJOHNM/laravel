@@ -8,9 +8,9 @@ use App\Mail\UserEmail;
 
 class MessageController extends Controller
 {
-    public function sendMessage(){
+    public function sendMessage(Request $request){
 
-        request()->validate([
+       request()->validate([
             'body' => 'required'
         ]);
 
