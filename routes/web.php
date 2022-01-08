@@ -4,6 +4,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PostCommentsController;
+use App\Http\Controllers\MessageController;
+
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
@@ -44,7 +46,6 @@ Route::get('categories/{category:id}',function(Category $category){
 
 });
 
-
 Route::get('authors/{author:username}',function(User $author){
     return view('posts.index',[
         'posts' => $author->posts->load(['category','author']),
@@ -53,6 +54,8 @@ Route::get('authors/{author:username}',function(User $author){
 
 });
 
+Route::get('/message','MessageController@index');
+Route::post('/sendmessage','MessageController@sendMessage');
 
 Route::get('register',[RegisterController::class,'create'])->middleware('guest');
 Route::post('register',[RegisterController::class,'store'])->middleware('guest');
