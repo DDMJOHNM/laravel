@@ -1,4 +1,4 @@
-<form method="POST" action="/admin/posts">
+<form method="POST" action="/admin/posts" enctype="multipart/form-data">
     @csrf
     <h1>Admin|Add Post</h1>
     <div>
@@ -13,6 +13,14 @@
         <label for="slug">Slug</label>
         <input type="text"  name="slug" id="slug" required value="{{ old('slug') }}"/>
         @error('slug')
+            <p>{{$message}}</p>
+        @enderror
+
+    </div>
+    <div>
+        <label for="thumbnail">Thumbnail</label>
+        <input type="file"  name="thumbnail" id="thumbnail"/>
+        @error('thumbnail')
             <p>{{$message}}</p>
         @enderror
 
@@ -35,7 +43,10 @@
             @endphp
 
             @foreach ($categories as $category)
-            <option value="{{ $category->id }}"  {{ old('category_id')  == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+            <option value="{{ $category->id }}"
+            {{ old('category_id')  == $category->id ? 'selected' : '' }}>
+                {{ ucwords($category->name) }}
+            </option>
             @endforeach
 
         </select>

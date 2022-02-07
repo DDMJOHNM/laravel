@@ -12,12 +12,18 @@
         @auth
 
         <span>Welcome back, {{ auth()->user()->name }} </span>
+        <ul>
+            <li><a href="/admin/posts/create">New Post</a>
+            <li><a href="/admin/posts">Manage Posts</a>
 
-        <form method="POST" action="/logout">
-            @csrf
+            <li>
+                <form method="POST" action="/logout">
+                @csrf
 
-            <button type="submit">Log Out</button>
-        </form>
+                <button type="submit">Log Out</button>
+                </form>
+            </li>
+        </ul>
 
         @else
 

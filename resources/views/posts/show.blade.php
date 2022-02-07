@@ -12,6 +12,7 @@
         <article>
             <div>
                 {{ $post->body }}
+                <image width="1000px" src="/storage/{{$post->thumbnail}}" alt="image" />
             </div>
             <a href="{{isset($_REQUEST['page']) ? '/?page='.urlencode($_REQUEST['page']) : '/' }}">back</a>
         </article>
@@ -41,7 +42,7 @@
             <form method="POST" action="/posts/{{ $post->slug }}/comments">
                 @csrf
                 <header>
-                    <img src="https://i.pravatar.cc/50" alt="">
+                    <img src="/storage{{ $post->thumbnail}}" alt="">
                     <p>Want to participate?</p>
                     <textarea placeholder="Comment here" rows="5" cols="30" name="body">
 
